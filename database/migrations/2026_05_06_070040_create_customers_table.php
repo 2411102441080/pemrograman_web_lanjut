@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone_number')->nullable();
-            $table->text('address')->nullable();
+            $table->longText('address');
+            $table->integer('provinces_id');
+            $table->integer('regencies_id');
+            $table->integer('zip_code');
+            $table->string('phone_number');
             $table->timestamps();
         });
     }

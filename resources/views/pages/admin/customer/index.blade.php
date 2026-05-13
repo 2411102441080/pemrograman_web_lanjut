@@ -26,6 +26,9 @@
                             <th>Email</th>
                             <th>Nomor HP</th>
                             <th>Alamat</th>
+                            <th>Provinsi</th>
+                            <th>Kabupaten/Kota</th>
+                            <th>Kode Pos</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,23 +39,29 @@
                             <th>Email</th>
                             <th>Nomor HP</th>
                             <th>Alamat</th>
+                            <th>Provinsi</th>
+                            <th>Kabupaten/Kota</th>
+                            <th>Kode Pos</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($customer as $customer)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $customer->name }}</td>
-                                <td>{{ $customer->email }}</td>
-                                <td>{{ $customer->phone_number }}</td>
-                                <td>{{ $customer->address }}</td>
-                                <td>
-                                    <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-warning mb-3">Edit</a>
-                                    <form id="delete-form-{{ $customer->id }}" action="{{ route('customer.destroy', $customer->id) }}" method="POST" class="d-inline">
+                 @foreach ($customer as $key => $item)
+            <tr>
+            <td>{{ $key + 1 }}</td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->email }}</td>
+            <td>{{ $item->phone_number }}</td>
+            <td>{{ $item->address }}, {{ $item->zip_code }}</td>
+            <td>{{ $item->province?->name ?? 'Tidak ada data' }}</td>
+            <td>{{ $item->regency?->name ?? 'Tidak ada data' }}</td>
+            <td>{{ $item->zip_code ?? 'Tidak ada data' }}</td>
+            <td>
+                                    <a href="{{ route('customer.edit', $item->id) }}" class="btn btn-warning mb-3">Edit</a>
+                                    <form id="dePlete-form-{{ $item->id }}" action="{{ route('customer.destroy', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-danger mb-3" onclick="confirmDelete({{ $customer->id }})">Hapus</button>
+                                        <button type="button" class="btn btn-danger mb-3" onclick="confirmDelete({{ $item->id }})">Hapus</button>
 
                                     </form>
                                 </td>

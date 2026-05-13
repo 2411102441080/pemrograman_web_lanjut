@@ -13,7 +13,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
-        $customer = customer::all(); // ambil semua data
+        // Ambil data customer sekaligus memuat relasi wilayahnya
+    $customer = Customer::with(['province', 'regency'])->get();// ambil semua data
         return view('pages.admin.customer.index',compact('customer'));
     }
 
@@ -35,14 +36,20 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'phone_number' => 'nullable',
             'address' => 'nullable',
+            'provinces_id' => 'required',
+            'regencies_id' => 'required',
+            'zip_code' => 'nullable',
+            'phone_number' => 'required',
         ]);
         customer::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone_number' => $request->phone_number,
             'address' => $request->address,
+            'provinces_id' => $request->provinces_id,
+            'regencies_id' => $request->regencies_id,
+            'zip_code' => $request->zip_code,
+            'phone_number' => $request->phone_number,
         ]);
         return redirect()->route('customer.index')->with('success', 'Customer berhasil ditambahkan');
     }
