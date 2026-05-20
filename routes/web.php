@@ -11,10 +11,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('users', UsersController::class);
     Route::resource('customer', CustomerController::class);
 }); 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes();  
