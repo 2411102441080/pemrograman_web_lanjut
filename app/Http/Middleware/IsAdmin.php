@@ -23,6 +23,6 @@ class IsAdmin
         if (Auth::user()->role === 'ADMIN') {
             return $next($request);
         }
-        return redirect('/home'); // Arahkan kembali jika bukan admin
+        return redirect('/'); // Arahkan kembali jika bukan admin
     }
 }
