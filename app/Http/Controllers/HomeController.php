@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-
+use App\Models\User;
 class HomeController extends Controller
 {
     /**
@@ -25,9 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $customers = Customer::all();
+        $users = User::all();
         return view('pages.frontend.home',
         [
-            'customers' => $customers
+            'customers' => $customers,
+            'users' => $users
         ]);
     }
 }
