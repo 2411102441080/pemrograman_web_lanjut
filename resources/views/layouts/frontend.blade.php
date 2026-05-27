@@ -29,7 +29,7 @@
 
   <!-- Preloader -->
   <div id="preloader"></div>
-
+{{-- percobaan --}}
 
 @include("include.frontend.script")
 </body>
