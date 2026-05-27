@@ -20,6 +20,7 @@
 </head>
 
 <body class="index-page">
+  {{-- percobaan perubahan --}}
 
     @include("include.frontend.header")
     @yield("content")
